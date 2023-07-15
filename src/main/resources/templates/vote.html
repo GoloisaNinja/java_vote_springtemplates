@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>Voterly Bot Main</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/styles/vote.css}" rel="stylesheet" />
+</head>
+<body>
+<header class="vote_header">
+    <h1>Voterly Main</h1>
+    <h2>At Voterly, we recommend choosing the lesser of all evils!</h2>
+</header>
+<main>
+    <div>
+        <h3>Local Candidates</h3>
+        <fieldset>
+            <div>
+                <h4>City Council</h4>
+                <div>
+                    <label for="dunder">Dunder Mifflin</label>
+                    <input type="radio" id="dunder" name="councilman" value="Dunder Mifflin" checked>
+                </div>
+                <div>
+                    <label for="morty">Rick Morty</label>
+                    <input type="radio" id="morty" name="councilman" value="Rick Morty">
+                </div>
+                <div>
+                    <label for="yu">Iam Yu</label>
+                    <input type="radio" id="yu" name="councilman" value="Iam Yu">
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div>
+        <h3>National Candidates</h3>
+        <fieldset>
+            <div>
+                <h4>Governor of Cheeses</h4>
+                <div>
+                    <label for="threepwood">Guybrush Threepwood</label>
+                    <input type="radio" id="threepwood" name="governor" value="Guybrush Threepwood" checked>
+                </div>
+                <div>
+                    <label for="cheddar">Chet Cheddar</label>
+                    <input type="radio" id="cheddar" name="governor" value="Chet Cheddar">
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <button id="vote_btn">Cast Votes!</button>
+    <div class="vote_summary" id="vote_summary">
+        <h5 id="summary_header">Vote Summary</h5>
+        <div class="summary_details" id="summary_details"></div>
+    </div>
+</main>
+</body>
+<script>
+    const voteBtn = document.getElementById("vote_btn");
+    const summary = document.getElementById("vote_summary");
+    const details = document.getElementById("summary_details");
+    const options = document.querySelectorAll("input");
+
+    let selectedNameArr = [];
+    const reset = () => {
+        for (const vote of options) {
+            if (vote.value === "Dunder Mifflin" || vote.value === "Guybrush Threepwood") {
+                vote.checked = true;
+            }
+        }
+        selectedNameArr = [];
+        summary.classList.remove("show");
+        while (details.firstChild) {
+            details.removeChild(details.firstChild);
+        }
+    }
+    voteBtn.addEventListener("click", () => {
+        for (const vote of options) {
+            if (vote.checked) {
+                selectedNameArr.push(vote.value)
+                let p = document.createElement("p");
+                p.innerHTML = vote.value;
+                details.append(p);
+            }
+        }
+        console.log(selectedNameArr);
+        summary.classList.add("show");
+        setTimeout(() => reset(), 8000)
+    })
+</script>
+</html>

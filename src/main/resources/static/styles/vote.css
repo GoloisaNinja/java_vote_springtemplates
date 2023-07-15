@@ -1,0 +1,11 @@
+.vote_header {
+    background: black;
+    color: white;
+}
+.vote_summary {
+    display: none;
+    background: yellow;
+}
+.vote_summary.show {
+    display: block;
+}
